@@ -38,4 +38,4 @@ terraform.rc
 **/key.pem
 
 # Terraform lock files
-.terraform.lock.hcl
+*.lock.hcl*

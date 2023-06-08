@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     k3d = {
-      source = "pvotal-tech/k3d"
+      source  = "pvotal-tech/k3d"
       version = "~>0.0.6"
     }
     kubernetes = {
@@ -17,7 +17,7 @@ terraform {
   }
 }
 provider "kubernetes" {
-  config_path    = "~/.kube/config"
+  config_path = "~/.kube/config"
   //config_context = module.cluster.cluster_name
 }
 provider "helm" {

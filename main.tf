@@ -8,10 +8,6 @@ module "monitoring" {
 }
 
 module "ingress" {
-  source     = "./module/ingress"
-}
-
-module "tls" {
-  source     = "./module/tls"
-  depends_on = [ module.ingress ]
+  source = "./module/ingress"
+  depends_on = [module.cluster]
 }

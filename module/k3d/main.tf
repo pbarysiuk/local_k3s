@@ -26,7 +26,7 @@ resource "k3d_cluster" "mycluster" {
       "loadbalancer:*"
     ]
   }
-    port {
+  port {
     host_port      = 443
     container_port = 443
     node_filters = [

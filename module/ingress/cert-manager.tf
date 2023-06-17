@@ -1,24 +1,13 @@
 resource "helm_release" "cert_manager" {
-  name = "cert-manager"
+  name       = "cert-manager"
   repository = "https://charts.jetstack.io"
-  chart = "cert-manager"
-  namespace = "ingress"
+  chart      = "cert-manager"
+  namespace  = "ingress"
   set {
-    name = "installCRDs"
+    name  = "installCRDs"
     value = "true"
   }
-}
-
-resource "kubernetes_labels" "cert_manager" {
-  api_version = "v1"
-  kind = "Namespace"
-  metadata {
-    name = "ingress"
-    namespace = "ingress"
-  }
-  labels = {
-      "certmanager.k8s.io/disable-validation" = "true"
-  }
+  depends_on = [kubernetes_namespace_v1.ingress]
 }
 
 resource "kubectl_manifest" "external_secrets_vault_store" {
@@ -43,5 +32,5 @@ resource "kubectl_manifest" "external_secrets_vault_store" {
           ingress:
             class: nginx
   EOF
-  depends_on = [ helm_release.cert_manager ]
+  depends_on = [helm_release.cert_manager]
 }

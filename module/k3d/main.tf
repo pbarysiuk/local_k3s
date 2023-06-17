@@ -34,18 +34,6 @@ resource "k3d_cluster" "mycluster" {
       "loadbalancer:*"
     ]
   }
-  registries {
-    use = [
-      "k3d-registry.localhost:5000"
-    ]
-    config = <<EOF
-mirrors:
-  "k3d-registry.localhost:5000":
-    endpoint:
-      - http://k3d-registry.localhost:5000
-EOF
-  }
-
   k3d {
     disable_load_balancer = false
     disable_image_volume  = false
@@ -65,21 +53,3 @@ EOF
     switch_current_context    = true
   }
 }
-
-# resource "k3d_node" "mycluster_node_1" {
-#   name = "k3d_mycluster_node_1"
-
-#   cluster = "mycluster"
-#   image   = "rancher/k3s:v1.27.1-k3s1"
-#   memory  = "2Gi"
-#   role    = "agent"
-# }
-
-# resource "k3d_registry" "mycluster-registry" {
-#   name = "registry.localhost"
-#   port {
-#       host = "registry.localhost"
-#       host_ip = "127.0.0.1"
-#       host_port = "12345"
-#   }
-# }

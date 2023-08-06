@@ -23,6 +23,7 @@ resource "helm_release" "kube-prometheus-stack" {
   create_namespace = "true"
   values           = ["${file("${path.module}/values_operator.yaml")}"]
 }
+#"nginx.ingress.kubernetes.io/rewrite-target" = "/"
 resource "kubernetes_ingress_v1" "grafana_ingress" {
   wait_for_load_balancer = true
   metadata {
@@ -31,7 +32,6 @@ resource "kubernetes_ingress_v1" "grafana_ingress" {
     annotations = {
       "nginx.ingress.kubernetes.io/use-regex" = "true"
       #"kubernetes.io/ingress.class"                = "nginx"
-      #"nginx.ingress.kubernetes.io/rewrite-target" = "/"
       "ingress.kubernetes.io/ssl-redirect" = "true"
     }
   }

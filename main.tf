@@ -11,3 +11,8 @@ module "ingress" {
   source     = "./module/ingress"
   depends_on = [module.cluster]
 }
+
+module "argocd" {
+  source     = "./module/argocd"
+  depends_on = [module.cluster]
+}

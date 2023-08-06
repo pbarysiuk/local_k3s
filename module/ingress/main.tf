@@ -32,6 +32,6 @@ resource "kubernetes_secret" "k8s_local_tls" {
     "tls.key" = "${file("${path.module}/key.pem")}"
   }
 
-  type       = "kubernetes.io/tls"
-  depends_on = [kubernetes_namespace_v1.ingress]
+  type = "kubernetes.io/tls"
+  //depends_on = [kubernetes_namespace_v1.ingress]
 }
